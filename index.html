@@ -27,6 +27,10 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+	.bookmarklet {
+		border: 1px solid #aaa;
+		background-color: #ddd;
+	}
   </style>
 </head>
 
@@ -50,33 +54,70 @@
     </div>
 
     <h2>Install</h2>
-<p>- Go to your web browser (Chrome and Firefox are tested so far)
-- Make sure your bookmark toolbar is visible 
-- Go to http://dev.iks-project.eu/demos/snml-orf-bookmarklet/
-- Customize Stanbol url and label 
-e.g. url: `http://dev.iks-project.eu/stanbolfull` label: `Stanbol Full`
-would use the stable launcher on our server.
-- Click 'Generate Bookmarklet'
-- Drag-and-drop the created link on your Browser Link-toolbar</p>
-<h2>License</h2>
-<p>Proggis is a free software project, available under the MIT license.</p>
-<h2>Authors</h2>
-<p>Szaby Grünwald (www.github.com/szabyg)<br/><br/>      </p>
+
+    Stanbol uri: <input id="stanbol-uri" value="http://dev.iks-project.eu:8080" size="60"/><br/>
+    Bookmarklet label: <input id="label" value="Stanbol Annotate" size="60"/><br/>
+    Default CSS Selector: <input id="css-selector" value="[descr], #content, .content, .text" size="60"/><br/>
+    Configurable CSS selector:
+    <label><input type="radio" name="css" value="manual" id="cssManual" /> on</label>
+    <label><input type="radio" name="css" value="auto" id="cssAuto" checked/> off</label>
+    <script>
+        function createBookmarklets (){
+            // var appRoot = window.location.origin + window.location.pathname + "/";
+            var bookmarkletConfig = {
+                appRoot: window.location.href + "/",
+                stanbolUri: document.getElementById("stanbol-uri").value,
+                defaultCssSelector: document.getElementById("css-selector").value,
+                cssPopup: document.getElementById("cssManual").checked
+            }
+            var label = document.getElementById("label").value;
+            var link = "<a class='bookmarklet' href='javascript:window.bookmarkletConfig=" + 
+                        JSON.stringify(bookmarkletConfig) + 
+                        ';var%20e=document.createElement("script");e.setAttribute("language","javascript");e.setAttribute("src","' + 
+                        bookmarkletConfig.appRoot + 
+                        'loader.js?"+Math.random().toString().substring(2));document.body.appendChild(e);window.stanbolUrl="' + 
+                        bookmarkletConfig.stanbolUri + 
+                        '";void(0);\'>' + 
+                        label + 
+                        "</a>";
+            console.info(link);
+            var res = ""
+            res +=  "<br/><br/>Bookmarklet: ";
+            res +=  link;
+            document.getElementById("bookmarklets").innerHTML = res;
+        }
+    </script>
+    <div id="bookmarklets"></div>
+    <br/>
+    <button onclick="javascript:createBookmarklets()">Generate Bookmarklet</button>
+
+    <p>- Go to your web browser (Chrome and Firefox are tested so far)
+    - Make sure your bookmark toolbar is visible 
+    - Go to http://dev.iks-project.eu/demos/snml-orf-bookmarklet/
+    - Customize Stanbol url and label 
+    e.g. url: `http://dev.iks-project.eu/stanbolfull` label: `Stanbol Full`
+    would use the stable launcher on our server.
+    - Click 'Generate Bookmarklet'
+    - Drag-and-drop the created link on your Browser Link-toolbar</p>
+    <h2>License</h2>
+    <p>Proggis is a free software project, available under the MIT license.</p>
+    <h2>Authors</h2>
+    <p>Szaby Grünwald (www.github.com/szabyg)</p>
 
 
     <h2>Download</h2>
     <p>
       You can download this project in either
-      <a href="http://github.com/szabyg/snml-orf-bookmarklet/zipball/master">zip</a> or
-      <a href="http://github.com/szabyg/snml-orf-bookmarklet/tarball/master">tar</a> formats.
+      <a href="http://github.com/szabyg/vie-annotate-bookmarklet/zipball/master">zip</a> or
+      <a href="http://github.com/szabyg/vie-annotate-bookmarklet/tarball/master">tar</a> formats.
     </p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
-      <pre>$ git clone git://github.com/szabyg/snml-orf-bookmarklet</pre>
+      <pre>$ git clone git://github.com/szabyg/vie-annotate-bookmarklet</pre>
     </p>
 
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/szabyg/snml-orf-bookmarklet">szabyg/snml-orf-bookmarklet</a>
+      get the source code on GitHub : <a href="http://github.com/szabyg/vie-annotate-bookmarklet">szabyg/vie-annotate-bookmarklet</a>
     </div>
 
   </div>
