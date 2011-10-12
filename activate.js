@@ -16,7 +16,7 @@ setTimeout(function(){
         });
 
         var z = new VIE();
-        z.use(new z.StanbolService({url : appConfig.stanbolUrl, proxyDisabled: true}));
+        z.use(new z.StanbolService({url : appConfig.stanbolUri, proxyDisabled: true}));
         // make the content element editable
         console.log("analyzing", selector, $(selector));
         $(selector)
