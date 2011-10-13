@@ -3,7 +3,7 @@
 <head>
   <meta charset='utf-8'>
 
-  <title>szabyg/snml-orf-bookmarklet @ GitHub</title>
+  <title>szabyg/vie-annotation-bookmarklet @ GitHub</title>
 
   <style type="text/css">
     body {
@@ -35,18 +35,18 @@
 </head>
 
 <body>
-  <a href="http://github.com/szabyg/snml-orf-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/szabyg/vie-annotation-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
   <div id="container">
 
     <div class="download">
-      <a href="http://github.com/szabyg/snml-orf-bookmarklet/zipball/master">
+      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">
         <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/szabyg/snml-orf-bookmarklet/tarball/master">
+      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/szabyg/snml-orf-bookmarklet">vie-annotation-bookmarklet</a>
+    <h1><a href="http://github.com/szabyg/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a>
       <span class="small">by <a href="http://github.com/szabyg">szabyg</a></span></h1>
 
     <div class="description">
@@ -71,14 +71,12 @@
                 cssPopup: document.getElementById("cssManual").checked
             }
             var label = document.getElementById("label").value;
-            var link = "<a class='bookmarklet' href='javascript:window.bookmarkletConfig=" + 
-                        JSON.stringify(bookmarkletConfig) + 
-                        ';var%20e=document.createElement("script");e.setAttribute("language","javascript");e.setAttribute("src","' + 
-                        bookmarkletConfig.appRoot + 
-                        'loader.js?"+Math.random().toString().substring(2));document.body.appendChild(e);window.stanbolUrl="' + 
-                        bookmarkletConfig.stanbolUri + 
-                        '";void(0);\'>' + 
-                        label + 
+            var link = "<a class='bookmarklet' href='javascript:window.bookmarkletConfig=" +
+                        JSON.stringify(bookmarkletConfig) +
+                        ';var e=document.createElement("script");e.setAttribute("language","javascript");e.setAttribute("src","' +
+                        bookmarkletConfig.appRoot +
+                        'loader.js?"+Math.random().toString().substring(2));document.body.appendChild(e);void(0);\'>'+
+                        label +
                         "</a>";
             console.info(link);
             var res = ""
@@ -94,7 +92,7 @@
     <ol>
         <li>Go to your web browser (Chrome and Firefox are tested so far)</li>
         <li>Make sure your bookmark toolbar is visible </li>
-        <li>Go to http://dev.iks-project.eu/demos/snml-orf-bookmarklet/</li>
+        <li>Go to http://dev.iks-project.eu/demos/vie-annotation-bookmarklet/</li>
         <li>Customize Stanbol url and label </li>
         e.g. url: `http://dev.iks-project.eu/stanbolfull` label: `Stanbol Full`</li>
         would use the stable launcher on our server.</li>
