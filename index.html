@@ -71,13 +71,17 @@
                 cssPopup: document.getElementById("cssManual").checked
             }
             var label = document.getElementById("label").value;
-            var link = "<a class='bookmarklet' href='javascript:window.bookmarkletConfig=" +
-                        JSON.stringify(bookmarkletConfig) +
-                        ';var e=document.createElement("script");e.setAttribute("language","javascript");e.setAttribute("src","' +
-                        bookmarkletConfig.appRoot +
-                        'loader.js?"+Math.random().toString().substring(2));document.body.appendChild(e);void(0);\'>'+
-                        label +
-                        "</a>";
+            var link =
+                "<a class='bookmarklet' href='" +
+                    "javascript:window.bookmarkletConfig=" +
+                        JSON.stringify(bookmarkletConfig) + ";" +
+                    'var e=document.createElement("script");' +
+                    'e.setAttribute("language","javascript");' +
+                    'e.setAttribute("src","' + bookmarkletConfig.appRoot +
+                    'loader.js?"+Math.random().toString().substring(2));' +
+                    'document.body.appendChild(e);' +
+                    'void(0);' +
+                "'>" + label + "</a>";
             console.info(link);
             var res = ""
             res +=  "<br/><br/>Bookmarklet: ";
