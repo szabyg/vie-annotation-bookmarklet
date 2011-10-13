@@ -41,9 +41,11 @@ setTimeout(function(){
             }
 
         })
-        .annotate('enable', function(success){
-            console.info("success:", success);
+        .each(function(){
+            $(this)
+            .annotate('enable', function(success){
+                console.info("success:", success);
+            });
         });
-
     });
 }, 100);
