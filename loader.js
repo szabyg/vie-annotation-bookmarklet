@@ -74,4 +74,9 @@
         appRoot + "annotate.js/lib/annotate.js?" + Math.random().toString().substring(2),
         appRoot + "activate.js?" + Math.random().toString().substring(2)
     ]);
+    // Show spinner
+    var e = document.createElement("div");
+    e.setAttribute("id", "loadingDiv");
+    e.innerHTML = "<img src='" + appRoot + "spinner.gif'/>";
+    document.body.appendChild(e);
 })();
