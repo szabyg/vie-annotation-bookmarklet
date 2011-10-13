@@ -29,7 +29,7 @@
     };
     Stanbol.getEntityAnnotations = function(enhList) {
       return _(enhList).filter(function(e) {
-        return e.hasType("<" + ns.enhancer + "EntityAnnotation>");
+        return e.isof("<" + ns.enhancer + "EntityAnnotation>");
       });
     };
     ANTT.getRightLabel = function(entity) {
@@ -211,7 +211,7 @@
         return $(element).text().replace(/\n/g, " ");
       };
       if (textContentOf(element).indexOf(text) === -1) {
-        throw "'" + text + "' doesn't appear in the text block.";
+        console.error("'" + text + "' doesn't appear in the text block.");
         return $();
       }
       start = options.start + textContentOf(element).indexOf(textContentOf(element).trim());
@@ -365,22 +365,26 @@
           element: this.element
         }).using(this.options.vieServices).execute().success(__bind(function(enhancements) {
           return _.defer(__bind(function() {
-            var entAnn, entityAnnotations, textAnn, textAnnotations, _i, _len;
+            var entAnn, entityAnnotations, textAnn, textAnnotations, textAnns, _i, _j, _len, _len2, _ref;
             entityAnnotations = Stanbol.getEntityAnnotations(enhancements);
             for (_i = 0, _len = entityAnnotations.length; _i < _len; _i++) {
               entAnn = entityAnnotations[_i];
-              textAnn = entAnn.get("dc:relation");
-              if (!(textAnn instanceof Backbone.Model)) {
-                textAnn = entAnn.vie.entities.get(textAnn);
-              }
-              if (!textAnn) {
-                continue;
-              }
-              _(_.flatten([textAnn])).each(function(ta) {
-                return ta.set({
-                  "entityAnnotation": entAnn.getSubject()
+              textAnns = entAnn.get("dc:relation");
+              _ref = _.flatten([textAnns]);
+              for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+                textAnn = _ref[_j];
+                if (!(textAnn instanceof Backbone.Model)) {
+                  textAnn = entAnn.vie.entities.get(textAnn);
+                }
+                if (!textAnn) {
+                  continue;
+                }
+                _(_.flatten([textAnn])).each(function(ta) {
+                  return ta.set({
+                    "entityAnnotation": entAnn.getSubject()
+                  });
                 });
-              });
+              }
             }
             textAnnotations = Stanbol.getTextAnnotations(enhancements);
             textAnnotations = _(textAnnotations).filter(function(textEnh) {
@@ -399,10 +403,10 @@
               return cb(true);
             }
           }, this));
-        }, this)).fail(function(xhr) {
+        }, this)).fail(__bind(function(xhr) {
           cb(false);
-          return console.error("analyze failed", xhr.responseText, xhr);
-        });
+          return this._logger.error("analyze failed", xhr.responseText, xhr);
+        }, this));
       },
       disable: function() {
         return $(':IKS-annotationSelector', this.element).each(function() {
@@ -432,7 +436,7 @@
       processTextEnhancement: function(textEnh, parentEl) {
         var eEnh, eEnhUri, el, options, sType, type, widget, _i, _j, _len, _len2, _ref;
         if (!textEnh.getSelectedText()) {
-          console.warn("textEnh", textEnh, "doesn't have selected-text!");
+          this._logger.warn("textEnh", textEnh, "doesn't have selected-text!");
           return;
         }
         el = $(ANTT.getOrCreateDomElement(parentEl[0], textEnh.getSelectedText(), {
@@ -507,7 +511,7 @@
       },
       _create: function() {
         this.element.click(__bind(function(e) {
-          console.log("click", e, e.isDefaultPrevented());
+          this._logger.log("click", e, e.isDefaultPrevented());
           e.preventDefault();
           if (!this.dialog) {
             this._createDialog();
@@ -795,7 +799,7 @@
         type = this._typeLabels(eEnhancement.getTypes()).toString() || "Other";
         source = this._sourceLabel(eEnhancement.getUri());
         active = this.linkedEntity && eEnhancement.getUri() === this.linkedEntity.uri ? " class='ui-state-active'" : "";
-        return $("<li" + active + "><a href='#'>" + label + " <small>(" + type + " from " + source + ")</small></a></li>").data('enhancement', eEnhancement).appendTo(ul);
+        return $("<li" + active + "><a>" + label + " <small>(" + type + " from " + source + ")</small></a></li>").data('enhancement', eEnhancement).appendTo(ul);
       },
       _createSearchbox: function() {
         var sugg, widget;
