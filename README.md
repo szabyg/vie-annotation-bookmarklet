@@ -13,4 +13,4 @@ VIE-based, stanbol-connected enhancer bookmarklet based on annotate.js
 
 ## License
 
-vie annotation bookmarklet is a free software project, available under the MIT license.
+The VIE Annotation Bookmarklet is a free software project, available under the MIT license.
