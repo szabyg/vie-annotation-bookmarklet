@@ -1,17 +1,19 @@
-.entity,
-a[typeof][about] {
+.entity, a[typeof][about] {
 	z-index: -1;
-    /* margin: -3px;*/
 	padding: 0 3px;
 	background-color: #E0E0E0;
-	/* box-shadow: 2px 2px 5px grey;*/
 	border-radius: 7px;
 	border: outset rgba(0, 0, 0, 0.2);
 	white-space: nowrap;
 	border-width:1px;
 }
-a[typeof][about] {text-decoration: underline overline;}
-a[typeof][about] {color: black}
+a[typeof][about] {
+    border-width: 1px 0;
+    border-color: rgba(0, 0, 0, 0.8);
+    border-style: solid;
+    border-radius: 0;
+    color: black;
+}
 .entity.withSuggestions {border-color: rgba(0, 0, 0, 0.8);}
 
 .entity.person, 
