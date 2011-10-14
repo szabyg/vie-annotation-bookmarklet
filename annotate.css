@@ -1,4 +1,4 @@
-span.entity,
+.entity,
 a[typeof][about] {
 	z-index: -1;
     /* margin: -3px;*/
