@@ -1,18 +1,18 @@
 span.entity,
 a[typeof][about] {
 	z-index: -1;
-	margin: -3px;
-	padding: 1px;
+    /* margin: -3px;*/
+	padding: 0 3px;
 	background-color: #E0E0E0;
 	/* box-shadow: 2px 2px 5px grey;*/
-	border-radius: 3px;
-	border: outset rgba(0, 0, 0, 0.1);
+	border-radius: 7px;
+	border: outset rgba(0, 0, 0, 0.2);
 	white-space: nowrap;
-	border-width:2px;
+	border-width:1px;
 }
 a[typeof][about] {border-radius:1px;border-width:1px;}
 a[typeof][about] {color: black}
-.entity.withSuggestions {border-color: rgba(0, 0, 0, 0.5);}
+.entity.withSuggestions {border-color: rgba(0, 0, 0, 0.8);}
 
 .entity.person, 
 a[typeof][about].person       {background-color: #ffe;}
