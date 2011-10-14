@@ -10,7 +10,7 @@ a[typeof][about] {
 	white-space: nowrap;
 	border-width:1px;
 }
-a[typeof][about] {border-radius:7px;border-width:1px;}
+a[typeof][about] {text-decoration: underline overline;}
 a[typeof][about] {color: black}
 .entity.withSuggestions {border-color: rgba(0, 0, 0, 0.8);}
 
