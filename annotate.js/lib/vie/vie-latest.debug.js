@@ -562,7 +562,7 @@ VIE.prototype.Entity = function(attrs, opts) {
             
             return instanceLD;
         },
-        
+
         setOrAdd: function (arg1, arg2) {
             var entity = this;
             if (typeof arg1 === "string" && arg2) {
@@ -578,13 +578,15 @@ VIE.prototype.Entity = function(attrs, opts) {
                 }
             return this;
         },
-        
-        _setOrAddOne: function (prop, value) {
-            var val = this.get(prop);
+
+        _setOrAddOne: function (attr, value) {
+            attr = mapAttributeNS(attr, self.vie.namespaces);
+            var val = Backbone.Model.prototype.get.call(this, attr);
+
             // No value yet, use the set method
             if (!val) {
                 var obj = {};
-                obj[prop] = value;
+                obj[attr] = value;
                 this.set(obj);
             }
             else {
@@ -596,12 +598,12 @@ VIE.prototype.Entity = function(attrs, opts) {
                     }
                     val.push(value);
                     var obj = {};
-                    obj[prop] = val;
+                    obj[attr] = val;
                     this.set(obj);
                 }
             }
         },
-        
+
         hasType: function(type){
             type = self.vie.types.get(type);
             return this.hasPropertyValue("@type", type);
@@ -2060,7 +2062,6 @@ VIE.prototype.StanbolService = function(options) {
             dc  : 'http://purl.org/dc/terms/',
             foaf: 'http://xmlns.com/foaf/0.1/',
             schema: 'http://schema.org/',
-            rdfschema: 'http://www.w3.org/2000/01/rdf-schema#',
             geo: 'http://www.w3.org/2003/01/geo/wgs84_pos#'
         }
     };
@@ -2115,7 +2116,7 @@ VIE.prototype.StanbolService.prototype = {
              {
                 'left' : [
                     '?subject a dbpedia:Person',
-                    '?subject rdfschema:label ?label'
+                    '?subject rdfs:label ?label'
                  ],
                  'right': function(ns){
                      return function(){
@@ -2137,7 +2138,7 @@ VIE.prototype.StanbolService.prototype = {
              {
                  'left' : [
                      '?subject a dbpedia:Place',
-                     '?subject rdfschema:label ?label'
+                     '?subject rdfs:label ?label'
                   ],
                   'right': function(ns) {
                       return function() {
@@ -2433,7 +2434,7 @@ StanbolConnector.prototype = {
     load: function (uri, success, error, options) {
         if (!options) { options = {}; }
         uri = uri.replace(/^</, '').replace(/>$/, '');
-        var url = this.baseUrl + this.entityhubUrlPrefix + "/sites/entity?id=" + uri;
+        var url = this.baseUrl + this.entityhubUrlPrefix + "/sites/entity?id=" + escape(uri);
         var proxyUrl = this._proxyUrl();
         var format = options.format || "application/rdf+json";
         
@@ -2489,7 +2490,6 @@ StanbolConnector.prototype = {
                     type: "text/plain"
                 } : "name=" + term + "&limit=" + limit + "&offset=" + offset,
             dataType: format,
-            contentType: proxyUrl ? undefined : "text/plain",
             accepts: {"application/rdf+json": "application/rdf+json"}
         });
     },
