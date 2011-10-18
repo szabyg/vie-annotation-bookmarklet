@@ -56,6 +56,7 @@
     // Loading style definitions
     loadStyles([
         appRoot + "annotate.css",
+        appRoot + "annotate.js/lib/jquery/jquery-ui.min.css",
         appRoot + "annotate.js/lib/Smoothness/jquery.ui.all.css"
     ]);
     // Loading the scripts
