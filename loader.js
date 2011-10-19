@@ -46,7 +46,7 @@
         css = csss[_i];
         var e = document.createElement('link');
         e.setAttribute('rel','stylesheet');
-        e.setAttribute('href', css);document.body.appendChild(e);
+        e.setAttribute('href', css);document.head.appendChild(e);
       }
     };
     function salt(){
@@ -72,8 +72,8 @@
         appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
         appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + salt(),
 
-        appRoot + "annotate.js/lib/annotate.js?" + Math.random().toString().substring(2),
-        appRoot + "activate.js?" + Math.random().toString().substring(2)
+        appRoot + "annotate.js/lib/annotate.js?" + salt(),
+        appRoot + "activate.js?"// + salt()
     ]);
     // Show spinner
     var e = document.createElement("div");
