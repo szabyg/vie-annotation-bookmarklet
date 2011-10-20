@@ -4,7 +4,7 @@ $(document).ready(function(){
     if(appConfig.cssPopup){
         selector = prompt("CSS selector for the annotation (e.g. p, body, div#content...)", appConfig.defaultCssSelector);
     }
-    $('#loadingDiv')
+    $('.loadingDiv')
     .hide()  // hide it initially
     .ajaxStart(function() {
         $(this).show();
