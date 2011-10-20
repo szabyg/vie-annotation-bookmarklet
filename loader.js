@@ -77,7 +77,7 @@
     ]);
     // Show spinner
     var e = document.createElement("div");
-    e.setAttribute("id", "loadingDiv");
+    e.setAttribute("class", "loadingDiv");
     e.innerHTML = "<img src='" + appRoot + "spinner.gif'/>";
     document.body.appendChild(e);
 })();

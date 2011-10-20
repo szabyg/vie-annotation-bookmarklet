@@ -5,8 +5,9 @@ $(document).ready(function(){
         appConfig.defaultCssSelector = selector = prompt("CSS selector for the annotation (e.g. p, body, div#content...)", appConfig.defaultCssSelector);
     }
     
-    $("head")[0].insertBefore($("<script>window.bookmarkletConfig = " + JSON.stringify(appConfig) + "</script>")[0], $("head").children()[0]);
-    $('#loadingDiv')
+    $("head")[0]
+	.insertBefore($("<script>window.bookmarkletConfig = " + JSON.stringify(appConfig) + "</script>")[0], $("head").children()[0]);
+    $('.loadingDiv')
     .hide()  // hide it initially
     .ajaxStart(function() {
         $(this).show();
