@@ -424,8 +424,8 @@
                     'flickr' : function (entity, serviceId) {
                         var url = "";
                         
-                        if (entity.has('geo')) {
-                            var geo = entity.get("geo");
+                        if (entity.has('schema:geo')) {
+                            var geo = entity.get("schema:geo");
                             return this._getUrlMainPartFromEntity(geo, serviceId);
                         } else if (entity.has('containedIn')) {
                             var containedIn = entity.get('containedIn');
@@ -461,6 +461,50 @@
                                 if ($.isArray(name)) name = name[0]; //just take the first
                                 url += "&imgtype=photo"; // type-specific commands
                                 url += "&q=tourist+attraction+" + name.replace(/ /g, '+').replace(/@.*/, '').replace(/"/g, '');
+                                return url;
+                            }
+                        }
+                        return undefined;
+                    }
+                },
+                "Organization" : {
+                    'flickr' : function (entity, serviceId) {
+                        var url = "";
+                        
+                        if (entity.has('location')) {
+                            var containedIn = entity.get('location');
+                            return this._getUrlMainPartFromEntity(containedIn, serviceId);
+                        } else if (entity.has('name')) {
+                            var name = entity.get("name");
+                            if ($.isArray(name) && name.length > 0) {
+                                for (var i = 0; i < name.length; i++) {
+                                    if (name[i].indexOf('@en') > -1) {
+                                        name = name[i];
+                                        break;
+                                    }
+                                }
+                                if ($.isArray(name)) name = name[0]; //just take the first
+                                url += "&text="; // *no* type-specific keywords
+                                url += name.replace(/ /g, '%20').replace(/@.*/, '').replace(/"/g, '');
+                                return url;
+                            }
+                        }
+                        return undefined
+                    },
+                    'gimage' : function (entity, serviceId) {
+                        var url = "";
+                        if (entity.has('name')) {
+                            var name = entity.get("name");
+                            if ($.isArray(name) && name.length > 0) {
+                                for (var i = 0; i < name.length; i++) {
+                                    if (name[i].indexOf('@en') > -1) {
+                                        name = name[i];
+                                        break;
+                                    }
+                                }
+                                if ($.isArray(name)) name = name[0]; //just take the first
+                                url += "&imgtype=photo"; // type-specific commands
+                                url += "&q=headquarter+" + name.replace(/ /g, '+').replace(/@.*/, '').replace(/"/g, '');
                                 return url;
                             }
                         }

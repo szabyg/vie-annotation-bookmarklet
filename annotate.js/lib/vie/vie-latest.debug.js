@@ -648,12 +648,15 @@ VIE.prototype.Collection = Backbone.Collection.extend({
     
     get: function(id) {
         if (id == null) return null;
-        
         id = (id.getSubject)? id.getSubject() : id;        
         if (typeof id === "string" && id.indexOf("_:") === 0) {
-            //bnode!
-            id = id.replace("_:bnode", 'c');
-            return this._byCid[id];
+            if (id.indexOf("bnode") === 2) {
+                //bnode!
+                id = id.replace("_:bnode", 'c');
+                return this._byCid[id];
+            } else {
+                return this._byId["<" + id + ">"];
+            }
         } else {
             id = this.toReference(id);
             return this._byId[id];
@@ -2157,28 +2160,112 @@ VIE.prototype.StanbolService.prototype = {
                           };
                       }(this.namespaces)
                   },
-             {
-                 'left' : [
-                     '?subject a dbpedia:Place',
-                     '?subject rdfs:label ?label'
-                  ],
-                  'right': function(ns) {
-                      return function() {
-                          return [
-                          jQuery.rdf.triple(this.subject.toString(),
-                              'a',
-                              '<' + ns.base() + 'Place>', {
-                                  namespaces: ns.toObj()
-                              }),
-                          jQuery.rdf.triple(this.subject.toString(),
-                                  '<' + ns.base() + 'name>',
-                              this.label.toString(), {
-                                  namespaces: ns.toObj()
-                              })
-                          ];
-                      };
-                  }(this.namespaces)
-              },
+                  {
+                      'left' : [
+                          '?subject a dbpedia:Place',
+                          '?subject rdfs:label ?label'
+                       ],
+                       'right': function(ns) {
+                           return function() {
+                               return [
+                               jQuery.rdf.triple(this.subject.toString(),
+                                   'a',
+                                   '<' + ns.base() + 'Place>', {
+                                       namespaces: ns.toObj()
+                                   }),
+                               jQuery.rdf.triple(this.subject.toString(),
+                                       '<' + ns.base() + 'name>',
+                                   this.label.toString(), {
+                                       namespaces: ns.toObj()
+                                   })
+                               ];
+                           };
+                       }(this.namespaces)
+                   },
+                   {
+                       'left' : [
+                           '?subject a dbpedia:Organisation',
+                           '?subject rdfs:label ?label'
+                        ],
+                        'right': function(ns) {
+                            return function() {
+                                return [
+                                jQuery.rdf.triple(this.subject.toString(),
+                                    'a',
+                                    '<' + ns.base() + 'Organization>', {
+                                        namespaces: ns.toObj()
+                                    }),
+                                    jQuery.rdf.triple(this.subject.toString(),
+                                        '<' + ns.base() + 'name>',
+                                    this.label.toString(), {
+                                        namespaces: ns.toObj()
+                                    }) 
+                                ];
+                            };
+                        }(this.namespaces)
+                    },
+                    {
+                        'left' : [
+                            '?subject a dbpedia:Organisation',
+                            '?subject foaf:homepage ?homepage'
+                         ],
+                         'right': function(ns) {
+                             return function() {
+                                 return [
+                                     jQuery.rdf.triple(this.subject.toString(),
+                                         '<' + ns.base() + 'url>',
+                                     this.homepage.toString(), {
+                                         namespaces: ns.toObj()
+                                     }) 
+                                 ];
+                             };
+                         }(this.namespaces)
+                     },
+                    {
+                        'left' : [
+                            '?subject a dbpedia:Organisation',
+                            '?subject geo:lat ?lat',
+                            '?subject geo:long ?long'
+                         ],
+                         'right': function(ns) {
+                             var placeId = new $.rdf.blank("[]").value;
+                             var geoId = new $.rdf.blank("[]").value;
+                             return function() {
+                                 return [
+                                     jQuery.rdf.triple(this.subject.toString(),
+                                         '<' + ns.base() + 'location>',
+                                         placeId, {
+                                         namespaces: ns.toObj()
+                                     }),
+                                     jQuery.rdf.triple(placeId,
+                                             'a',
+                                             '<' + ns.base() + 'Place>', {
+                                             namespaces: ns.toObj()
+                                         }),
+                                         jQuery.rdf.triple(placeId,
+                                                 '<' + ns.base() + 'geo>',
+                                                 geoId, {
+                                                 namespaces: ns.toObj()
+                                             }),
+                                             jQuery.rdf.triple(geoId,
+                                                     'a',
+                                                     '<' + ns.base() + 'GeoCoordinates>', {
+                                                     namespaces: ns.toObj()
+                                                 }) ,
+                                                 jQuery.rdf.triple(geoId,
+                                                         '<' + ns.base() + 'latitude>',
+                                                         this.lat.toString(), {
+                                                         namespaces: ns.toObj()
+                                                     }) ,
+                                                     jQuery.rdf.triple(geoId,
+                                                             '<' + ns.base() + 'longitude>',
+                                                             this.long.toString(), {
+                                                             namespaces: ns.toObj()
+                                                         }) 
+                                 ];
+                             };
+                         }(this.namespaces)
+                     }                  
         ];
         
         this.vie.types.addOrOverwrite('enhancer:EntityAnnotation', [
