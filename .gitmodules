@@ -1,3 +1,0 @@
-[submodule "annotate.js"]
-	path = annotate.js
-	url = git://github.com/szabyg/annotate.js.git
