@@ -11,6 +11,14 @@ VIE-based, stanbol-connected enhancer bookmarklet based on annotate.js
 - Click 'Generate Bookmarklet' 
 - Drag-and-drop the created link on your Browser Link-toolbar
 
+## Development
+For cloning this module you'll have to check out the submodule annotate.js
+git clone git://github.com/szabyg/vie-annotation-bookmarklet.git
+
+    cd vie-annotation-bookmarklet
+    git submodule init
+    git submodule update
+
 ## License
 
 The VIE Annotation Bookmarklet is a free software project, available under the MIT license.
