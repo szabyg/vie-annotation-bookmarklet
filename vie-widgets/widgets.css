@@ -1,0 +1,48 @@
+#viewidgets-wrapper {
+  fonts-ize: 62,5%;
+  text-align: center;
+  position:fixed;
+  top:0px;
+  right:0px;
+  height: 100%;
+}
+ 
+#viewidgets-wrapper:before {
+  content: '';
+  display: inline-block;
+  height: 100%; 
+  vertical-align: middle;
+ }
+ 
+#viewidgets-container {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 25px 15px;
+  border: #a0a0a0 solid 1px;
+  background: #f5f5f5;
+  box-shadow: 0px 0px 30px grey;
+  border-radius: 5px;
+  height:75%;
+  width:300px;
+  right:-250px;
+  position:relative;
+  background-image: url(dfkiiks.png);
+  background-repeat:no-repeat;
+  background-size:160px;
+ }
+ 
+ #viewidgets-container .entities {
+  background-color: transparent;
+  border: #a0a0a0 solid 1px;
+  height:28%;
+  overflow-y:scroll;
+  margin-top: 2%;
+  padding-top:2%;
+  padding-bottom:2%; 
+ }
+ 
+ #viewidgets-container .entities .container > * {
+ 
+  margin-bottom: 20px;
+ 
+ }
