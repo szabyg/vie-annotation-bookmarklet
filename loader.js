@@ -75,11 +75,13 @@
         appRoot + "annotate.js/lib/hallo/format.js",
 
         appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
-        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + salt(),
+// temporary-vie
+//        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + salt(),
+        appRoot + "vie-latest.debug.js?",
 
-        appRoot + "annotate.js/lib/annotate.js?" + salt(),
-        appRoot + "vie-widgets/vie.widget.image_search.js?" + salt(),
-        appRoot + "vie-widgets/rdfquery.js?" + salt(),
+        appRoot + "annotate.js/lib/annotate.js?",
+        appRoot + "vie-widgets/vie.widget.image_search.js?",
+        appRoot + "vie-widgets/rdfquery.js?",
         appRoot + "vie-widgets/schemaOrg/schema.json?" + salt(),
         appRoot + "vie-widgets/schemaOrg/wrapper.js?" + salt(),
         appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.min.js?" + salt(),
