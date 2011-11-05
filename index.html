@@ -3,7 +3,7 @@
 <head>
   <meta charset='utf-8'>
 
-  <title>szabyg/vie-annotation-bookmarklet @ GitHub</title>
+  <title>IKS: vie-annotation-bookmarklet @ GitHub</title>
 
   <style type="text/css">
     body {
@@ -35,19 +35,18 @@
 </head>
 
 <body>
-  <a href="http://github.com/szabyg/vie-annotation-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/neogermi/vie-annotation-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
   <div id="container">
 
     <div class="download">
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">
+      <a href="http://github.com/neogermi/vie-annotation-bookmarklet/zipball/master">
         <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">
+      <a href="http://github.com/neogermi/vie-annotation-bookmarklet/tarball/master">
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/szabyg/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a>
-      <span class="small">by <a href="http://github.com/szabyg">szabyg</a></span></h1>
+    <h1><a href="http://github.com/neogermi/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a></h1>
 
     <div class="description">
       VIE-based, stanbol-connected enhancer bookmarklet based on annotate.js
@@ -55,7 +54,7 @@
 
     <h2>Install</h2>
 
-    Stanbol uri: <input id="stanbol-uri" value="http://dev.iks-project.eu/stanbolfull" size="60"/><br/>
+    Stanbol uri: <input id="stanbol-uri" value="http://dev.iks-project.eu:8080" size="60"/><br/>
     Bookmarklet label: <input id="label" value="Stanbol Annotate" size="60"/><br/>
     Default CSS Selector: <input id="css-selector" value="[descr], #content, .content, .text" size="60"/><br/>
     Configurable CSS selector:
@@ -88,10 +87,11 @@
             res +=  link;
             document.getElementById("bookmarklets").innerHTML = res;
         }
+        window.onload = function () { createBookmarklets ();};
     </script>
     <div id="bookmarklets"></div>
     <br/>
-    <button onclick="javascript:createBookmarklets()">Generate Bookmarklet</button>
+    <button onclick="javascript:createBookmarklets()">Update Bookmarklet</button>
 
     <ol>
         <li>Go to your web browser (Chrome and Firefox are tested so far)</li>
@@ -106,26 +106,24 @@
     <h2>License</h2>
     <p>The vie annotation bookmarklet is a free software project, available under the MIT license.</p>
     <h2>Authors</h2>
-    <p>Szaby Grünwald (www.github.com/szabyg)</p>
+    <p>Szaby Grünwald (<a href="http://www.github.com/szabyg">www.github.com/szabyg</a>)</p>
+    <p>Sebastian Germesin (<a href="http://www.github.com/neogermi">www.github.com/neogermi</a>)</p>
 
 
     <h2>Download</h2>
     <p>
       You can download this project in either
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">zip</a> or
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">tar</a> formats.
+      <a href="http://github.com/neogermi/vie-annotation-bookmarklet/zipball/master">zip</a> or
+      <a href="http://github.com/neogermi/vie-annotation-bookmarklet/tarball/master">tar</a> formats.
     </p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
-      <pre>$ git clone git://github.com/szabyg/vie-annotation-bookmarklet</pre>
+      <pre>$ git clone git://github.com/neogermi/vie-annotation-bookmarklet</pre>
     </p>
     <h2>Testing area</h2>
     <p>Click the link you just created above and make sure #content or .content gets annotated</p>
-    <div id="#content" class="content">
+    <div id="content" class="content">
         <h3>Notable citizens of Salzburg</h3>
-
-
-
 Mozart's birthplace at Getreidegasse 9
 The composer Wolfgang Amadeus Mozart was born and raised in Salzburg and worked for the archbishops from 1769 to 1781. His house of birth and residence are tourist attractions. His family is buried in a small church graveyard in the old town, and there are many monuments to "Wolferl" in the city.
 The composer Johann Michael Haydn, brother of the composer Joseph Haydn. His works were admired by Mozart and Schubert. He was also the teacher of Carl Maria von Weber and Anton Diabelli and is known for his sacred music.
@@ -146,7 +144,7 @@ Georg Trakl is one of the most important voices in German literature and he was 
 Theodor Herzl worked in the courts in Salzburg during the year after he earned his law degree in 1884.[6]
     </div>
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/szabyg/vie-annotation-bookmarklet">szabyg/vie-annotation-bookmarklet</a>
+      get the source code on GitHub : <a href="http://github.com/neogermi/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a>
     </div>
 
   </div>
