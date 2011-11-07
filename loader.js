@@ -27,7 +27,7 @@
         head.appendChild(script);
     }
 
-    // Load a list of scripts and run cb
+    // Load a list of scripts *one after the other* and run cb
     var loadScripts = function(scripts, cb) {
         var script, _i, _len, _results;
         if(scripts.length) {
@@ -50,7 +50,7 @@
         e.setAttribute('href', css);document.head.appendChild(e);
       }
     };
-    function salt(){
+    function noCache(){
         return Math.random().toString().substring(2);
     }
     var appRoot = window.bookmarkletConfig.appRoot;
@@ -76,25 +76,24 @@
 
         appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
 // temporary-vie
-//        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + salt(),
+//        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + noCache(),
         appRoot + "vie-latest.debug.js?",
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
         appRoot + "vie-widgets/rdfquery.js?",
-        appRoot + "vie-widgets/schemaOrg/schema.json?" + salt(),
-        appRoot + "vie-widgets/schemaOrg/wrapper.js?" + salt(),
-        appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.min.js?" + salt(),
-        appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.video.js?" + salt(),
-        appRoot + "vie-widgets/jquery.anythingslider/swfobject.js?" + salt(),
-        appRoot + "vie-widgets/jquery.fancybox/jquery.fancybox-1.3.4.pack.js?" + salt(),
-        appRoot + "vie-widgets/jquery.fancybox/jquery.mousewheel-3.0.4.pack.js?" + salt(),
-        appRoot + "vie-widgets/jquery.fancybox/jquery.easing-1.3.pack.js?" + salt()
-    ], function () { 
-        //ensuring that this script is loaded at the end...
-        loadScripts([
-                     appRoot + "activate.js?" + salt()
-                     ])});
+        appRoot + "vie-widgets/schemaOrg/schema.json?",
+        appRoot + "vie-widgets/schemaOrg/wrapper.js?",
+        appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.min.js?",
+//        appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.video.js?",
+//        appRoot + "vie-widgets/jquery.anythingslider/swfobject.js?",
+        appRoot + "vie-widgets/jquery.fancybox/jquery.fancybox-1.3.4.pack.js?",
+        appRoot + "vie-widgets/jquery.fancybox/jquery.mousewheel-3.0.4.pack.js?",
+        appRoot + "vie-widgets/jquery.fancybox/jquery.easing-1.3.pack.js?",
+        appRoot + "activate.js?",
+        appRoot + "imagesearch.js?"
+    ]);
+
     // Show spinner
     var e = document.createElement("div");
     e.setAttribute("class", "loadingDiv");

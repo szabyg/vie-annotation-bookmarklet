@@ -2293,8 +2293,10 @@ VIE.prototype.StanbolService.prototype = {
             var service = this;
             //query enhancer with extracted text
             var success = function (results) {
-                var entities = service._enhancer2Entities(service, results);
-                analyzable.resolve(entities);
+                _.defer(function(){
+                    var entities = service._enhancer2Entities(service, results);
+                    analyzable.resolve(entities);
+                });
             };
             var error = function (e) {
                 analyzable.reject(e);
@@ -2324,8 +2326,10 @@ VIE.prototype.StanbolService.prototype = {
         var limit = (typeof findable.options.limit === "undefined") ? 20 : findable.options.limit;
         var offset = (typeof findable.options.offset === "undefined") ? 0 : findable.options.offset;
         var success = function (results) {
-            var entities = service._enhancer2Entities(service, results);
-            findable.resolve(entities);
+            _.defer(function(){
+                var entities = service._enhancer2Entities(service, results);
+                findable.resolve(entities);
+            });
         };
         var error = function (e) {
             findable.reject(e);
@@ -2346,8 +2350,10 @@ VIE.prototype.StanbolService.prototype = {
             loadable.resolve([]);
         };
         var success = function (results) {
-            var entities = service._enhancer2Entities(service, results);
-            loadable.resolve(entities);
+            _.defer(function(){
+                var entities = service._enhancer2Entities(service, results);
+                loadable.resolve(entities);
+            });
         };
         var error = function (e) {
             loadable.reject(e);
