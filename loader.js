@@ -66,7 +66,7 @@
     ]);
     // Loading the scripts
     loadScripts([
-        appRoot + "annotate.js/lib/jquery-1.5.1.js",
+        appRoot + "annotate.js/lib/jquery/jquery-1.7.1.js",
         appRoot + "annotate.js/lib/jquery-ui.1.9m5.js",
         appRoot + "annotate.js/lib/underscore-min.js",
         appRoot + "annotate.js/lib/backbone-min.js",
