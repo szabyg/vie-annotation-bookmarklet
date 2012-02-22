@@ -81,7 +81,7 @@
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
-        appRoot + "vie-widgets/rdfquery.js?",
+//        appRoot + "vie-widgets/rdfquery.js?",
         appRoot + "vie-widgets/schemaOrg/schema.json?",
         appRoot + "vie-widgets/schemaOrg/wrapper.js?",
         appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.min.js?",
