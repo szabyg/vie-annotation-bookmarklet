@@ -27,7 +27,6 @@ jQuery(document).ready(function(){
         // Show imageSearch element
         renderImageSearch(entity);
     });
-
     var renderImageSearch = function (entity) {
         var jQuerycontainer;
         if (entity.isof("Person")) {
@@ -85,11 +84,10 @@ jQuery(document).ready(function(){
                 var container = jQueryelem.closest('.entities').first();
                 container.attr('scrollTop', 0);
                 return this;
-            }
-        })
-        .vieImageSearch({
+            },
             entity: entity
         });
+
         jQuerycontainer.prepend(jQueryul);
         jQuerycontainer.parent().animate({"background-color": "#ff9"}, 500, function () {
             jQuery(this).animate({"background-color": "transparent"}, 5000);
