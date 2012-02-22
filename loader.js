@@ -74,13 +74,14 @@
         appRoot + "annotate.js/lib/hallo/hallo.js",
         appRoot + "annotate.js/lib/hallo/format.js",
 
-        appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
-// temporary-vie
+        // TODO switch back as soon https://github.com/bergie/VIE/pull/91 is approved
+        // appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
+        appRoot + "jquery.rdfquery.debug.js?",
+
         appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + noCache(),
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
-//        appRoot + "vie-widgets/rdfquery.js?",
         appRoot + "vie-widgets/schemaOrg/schema.json?",
         appRoot + "vie-widgets/schemaOrg/wrapper.js?",
         appRoot + "vie-widgets/jquery.anythingslider/jquery.anythingslider.min.js?",
