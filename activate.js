@@ -20,9 +20,7 @@ jQuery(document).ready(function(){
     // make the content element editable
     jQuery(selector)
     .hallo({
-        plugins: {
-          'halloformat': {}
-        },
+        plugins: {},
         editable: true
     })
     .annotate({
