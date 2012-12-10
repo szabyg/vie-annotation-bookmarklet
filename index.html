@@ -1,154 +1,294 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
+    <meta charset='utf-8'>
 
-  <title>IKS: vie-annotation-bookmarklet @ GitHub</title>
+    <title>IKS: vie-annotation-bookmarklet @ GitHub</title>
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #000000; }
-    h3 { text-align: center; color: #000000; }
-    a { color: #000000; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	.bookmarklet {
-		border: 1px solid #aaa;
-		background-color: #ddd;
-	}
-  </style>
+    <script type="text/javascript" src="annotate.js/lib/jquery/jquery-1.8.2.js"></script>
+    <!--<script type="text/javascript" src="lib/jquery-ui.1.9m5.js"></script>-->
+
+    <script type="text/javascript" src="annotate.js/lib/jqueryui/jquery-ui.1.9.2.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/underscore-min.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/backbone.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/hallo/hallo.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/hallo/format.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/jquery.rdfquery.debug.js"></script>
+    <script type="text/javascript" src="annotate.js/lib/vie/vie-2.1.0.debug.js"></script>
+
+    <style type="text/css">
+        body {
+            margin-top: 1.0em;
+            background-color: #ffffff;
+            font-family: Helvetica, Arial, FreeSans, san-serif;
+            color: #000000;
+        }
+        #container {
+            margin: 0 auto;
+            width: 700px;
+        }
+        h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
+        h1 .small { font-size: 0.4em; }
+        h1 a { text-decoration: none }
+        h2 { font-size: 1.5em; color: #000000; }
+        h3 { text-align: center; color: #000000; }
+        a { color: #000000; }
+        .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+        .download { float: right; }
+        pre { background: #000; color: #fff; padding: 15px;}
+        hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+        .footer { text-align:center; padding-top:30px; font-style: italic; }
+        .bookmarklet {
+            font-size: 140%;
+            border: 2px solid #5f5;
+            background-color: #ddd;
+            padding: 5px;
+        }
+        #error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-  <a href="http://github.com/szabyg/vie-annotation-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<a href="http://github.com/szabyg/vie-annotation-bookmarklet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<div id="container">
 
     <h1><a href="http://github.com/szabyg/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a></h1>
 
     <div class="description">
-      VIE-based, stanbol-connected enhancer bookmarklet based on annotate.js
+        Webpage enhancer bookmarklet based on VIE, Apache Stanbol and annotate.js
     </div>
 
     <h2>Install</h2>
 
-    Stanbol uri: <input id="stanbol-uri" value="http://dev.iks-project.eu/stanbolfull" size="60"/><br/>
-    Bookmarklet label: <input id="label" value="Stanbol Annotate" size="60"/><br/>
-    Default CSS Selector: <input id="css-selector" value="[descr], #content, .content, .text" size="60"/><br/>
-    Configurable CSS selector:
-    <label><input type="radio" name="css" value="manual" id="cssManual" /> on</label>
-    <label><input type="radio" name="css" value="auto" id="cssAuto" checked/> off</label>
+    <table>
+        <tr>
+            <td></td>
+            <td>
+                <span id="error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Stanbol uri</td>
+            <td><input id="stanbol-uri" value="http://dev.iks-project.eu/stanbolfull" size="60"/><button id="checkStanbol">check</button> </td>
+        </tr>
+        <tr>
+            <td>Enhancement Chain</td>
+            <td>
+                <select id="chain" value="default">
+                    <option>not loaded yet</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Bookmarklet label</td>
+            <td><input id="label" value="Enhancer" size="60"/></td>
+        </tr>
+        <tr>
+            <td>Default CSS Selector</td>
+            <td><input id="css-selector" value="#content, .content, .text" size="60"/></td>
+        </tr>
+        <tr>
+            <td>Configurable CSS selector</td>
+            <td>
+                <label><input type="radio" name="css" value="manual" id="cssManual" /> on</label><br/>
+                <label><input type="radio" name="css" value="auto" id="cssAuto" checked/> off</label>
+            </td>
+        </tr>
+        <tr>
+            <td>Load additional scripts</td>
+            <td><input id="scriptstoload" value="" size="60"/></td>
+        </tr>
+    </table>
     <script>
+        function getScriptsToLoad() {
+            var arr = document.getElementById("scriptstoload").value.split(',');
+            arr = _(arr).map(function(s){
+                return s.trim();
+            });
+            return arr;
+        }
+        function getBookmarkletConfig(){
+            return {
+                appRoot: window.location.href + "/",
+                stanbolUri: $("#stanbol-uri").val(),
+                chain: $("#chain").val(),
+                defaultCssSelector: $("#css-selector").val(),
+                cssPopup: $("#cssManual").attr('checked'),
+                scriptsToLoad: getScriptsToLoad()
+            }
+        }
+        function getChains(stanbolUri, cb) {
+            var query = "PREFIX enhancer: <http://stanbol.apache.org/ontology/enhancer/enhancer#> \n" +
+                "PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#> \n" +
+                "SELECT distinct ?name ?chain " +
+                "WHERE { " +
+                "?chain a enhancer:EnhancementChain. \n" +
+                "?chain rdfs:label ?name .\n" +
+                "} " +
+                "ORDER BY ASC(?name) ";
+            function success(res){
+                var chains = $('binding[name=name] literal',res).map(function(){
+                    return this.textContent;
+                }).toArray();
+                if(_(chains).indexOf('default') != -1){
+                    chains = _.union(['default'], chains);
+                }
+                cb(null, chains);
+            }
+            function error(xhr){
+                cb(xhr);
+            }
+            var uri = stanbolUri + "/enhancer/sparql";
+
+            $.ajax({
+                type: "POST",
+                url: uri,
+                data: {query: query},
+                // accepts: ["application/json"],
+                accepts: {'application/json':'application/sparql-results+json'},
+                // dataType: "application/json",
+                success: success,
+                error: error
+            });
+            // var xhr = $.getJSON(uri,success);xhr.error(error);
+        }
+        function fillChainList(){
+            var stanbolUri = getBookmarkletConfig().stanbolUri;
+            var v = new VIE();
+            v.use(new v.StanbolService({url : stanbolUri, proxyDisabled: true}));
+            getChains(stanbolUri, function(err, chains){
+                if(err){
+                    console.info(err);
+                    $('#chain').html("<option>Error loading chains</option>");
+                    $('#error').html('Error loading list of chains from ' + stanbolUri);
+                } else {
+                    console.info('Chains:', chains);
+                    $('#chain').html('');
+                    for(i in chains){
+                        var chain = chains[i];
+                        $('#chain').append("<option value='" + chain + "'>" + chain + "</option>");
+                    }
+                    createBookmarklets();
+                }
+            });
+
+        }
         function createBookmarklets (){
             // var appRoot = window.location.origin + window.location.pathname + "/";
-            var bookmarkletConfig = {
-                appRoot: window.location.href + "/",
-                stanbolUri: document.getElementById("stanbol-uri").value,
-                defaultCssSelector: document.getElementById("css-selector").value,
-                cssPopup: document.getElementById("cssManual").checked
-            }
+            var bookmarkletConfig = getBookmarkletConfig();
             var label = document.getElementById("label").value;
             var link =
-                "<a class='bookmarklet' href='" +
-                    "javascript:window.bookmarkletConfig=" +
-                        JSON.stringify(bookmarkletConfig) + ";" +
-                    'var e=document.createElement("script");' +
-                    'e.setAttribute("language","javascript");' +
-                    'e.setAttribute("src","' + bookmarkletConfig.appRoot +
-                    'loader.js?"+Math.random().toString().substring(2));' +
-                    'document.body.appendChild(e);' +
-                    'void(0);' +
-                "'>" + label + "</a>";
+                    "<a class='bookmarklet' href='" +
+                            "javascript:window.bookmarkletConfig=" +
+                            JSON.stringify(bookmarkletConfig) + ";" +
+                            'var e=document.createElement("script");' +
+                            'e.setAttribute("language","javascript");' +
+                            'e.setAttribute("src","' + bookmarkletConfig.appRoot +
+                            'loader.js?"+Math.random().toString().substring(2));' +
+                            'document.body.appendChild(e);' +
+                            'void(0);' +
+                            "'>" + label + "</a>";
             console.info(link);
             var res = ""
             res +=  "<br/><br/>Bookmarklet: ";
             res +=  link;
-            document.getElementById("bookmarklets").innerHTML = res;
+            $('#bookmarklets').html(res);
+            $('#error').html('');
+            $("#bookmarklets .bookmarklet").stop().css("background-color", "#55ff55")
+                    .animate({ backgroundColor: "#FFFFFF"}, 1500);
         }
-        window.onload = function () { createBookmarklets ();};
+
+        // Init UI
+        $(document).ready(function(){
+            fillChainList();
+            $('#checkStanbol').click(function(){
+                var stanbolUri = getBookmarkletConfig().stanbolUri;
+                fillChainList();
+            });
+            $("#chain").bind('change', function(e){
+                createBookmarklets();
+            });
+            $('#stanbol-uri').blur(function(e){
+                fillChainList();
+            });
+            $('input#label, input#css-selector, input#scriptstoload').blur(function(e){
+                createBookmarklets();
+            });
+            $('input[name=css]').click(function(){
+                createBookmarklets();
+            });
+            // createBookmarklets();
+        });
     </script>
     <div id="bookmarklets"></div>
     <br/>
     <button onclick="javascript:createBookmarklets()">Update Bookmarklet</button>
 
+    <h2>What is it for</h2>
+    <p>This tool is to test and try the enhancement capabilities of Apache Stanbol on virtually any webpage.</p>
+    <h2>How to use it</h2>
+    <h3>Installing</h3>
     <ol>
-        <li>Go to your web browser (Chrome and Firefox are tested so far)</li>
-        <li>Make sure your bookmark toolbar is visible </li>
-        <li>Go to http://dev.iks-project.eu/demos/vie-annotation-bookmarklet/</li>
-        <li>Customize Stanbol url and label </li>
+        <li>In your web browser (Chrome and Firefox are tested so far), make sure your bookmark toolbar is visible </li>
+        <li>Customize the bookmarklet parameters on the form above</li>
         e.g. url: `http://dev.iks-project.eu/stanbolfull` label: `Stanbol Full`</li>
         would use the stable launcher on our server.</li>
-        <li>Click 'Generate Bookmarklet'</li>
-        <li>Drag-and-drop the created link on your Browser Link-toolbar</li>
+        <li>Drag-and-drop the created link (in green border) on your Browsers bookmark-toolbar</li>
     </ol>
+    <h3>Applying on a web page</h3>
+    <p>After installing the link in the toolbar, load the page which you'd like to see enhancements for and click on the
+    bookmarklet. The Enhancements are highlighted and you can interact with them. Accepting an enhancement creates an RDFa
+    annotation in the DOM of the page. In a CMS, such an enhanced content can be saved just like any HTML content.</p>
     <h2>License</h2>
     <p>The vie annotation bookmarklet is a free software project, available under the MIT license.</p>
-    <h2>Authors</h2>
+    <h2>Author</h2>
     <p>Szaby Grünwald (<a href="http://www.github.com/szabyg">www.github.com/szabyg</a>)</p>
+    <h2>Contributors</h2>
     <p>Sebastian Germesin (<a href="http://www.github.com/neogermi">www.github.com/neogermi</a>)</p>
 
 
     <h2>Download</h2>
     <p>
-      You can download this project in either
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">zip</a> or
-      <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">tar</a> formats.
+        You can download this project in either
+        <a href="http://github.com/szabyg/vie-annotation-bookmarklet/zipball/master">zip</a> or
+        <a href="http://github.com/szabyg/vie-annotation-bookmarklet/tarball/master">tar</a> formats.
     </p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/szabyg/vie-annotation-bookmarklet</pre>
+        by running:
+    <pre>$ git clone git://github.com/szabyg/vie-annotation-bookmarklet</pre>
     </p>
     <h2>Testing area</h2>
     <p>Click the link you just created above and make sure #content or .content gets annotated</p>
     <div id="content" class="content">
         <h3>Notable citizens of Salzburg</h3>
-Mozart's birthplace at Getreidegasse 9
-The composer Wolfgang Amadeus Mozart was born and raised in Salzburg and worked for the archbishops from 1769 to 1781. His house of birth and residence are tourist attractions. His family is buried in a small church graveyard in the old town, and there are many monuments to "Wolferl" in the city.
-The composer Johann Michael Haydn, brother of the composer Joseph Haydn. His works were admired by Mozart and Schubert. He was also the teacher of Carl Maria von Weber and Anton Diabelli and is known for his sacred music.
-Christian Doppler, an expert on acoustic theory, was born in Salzburg. He is most known for his discovery of the Doppler effect.
-Josef Mohr was born in Salzburg. Together with Franz Gruber, he composed and wrote the text for "Silent Night". As a priest in neighbouring Oberndorf he performed the song for the first time in 1818.
-King Otto of Greece was born Prince Otto Friedrich Ludwig of Bavaria at the Palace of Mirabell, a few days before the city reverted from Bavarian to Austrian rule.
-Noted writer Stefan Zweig lived in Salzburg for about 15 years, until 1934.
-Maria Von Trapp (later Maria Trapp) and her family lived in Salzburg until they fled to the United States following the Nazi takeover.
-Salzburg is the birthplace of Hans Makart, a 19th-century Austrian painter-decorator and national celebrity. Makartplatz (Makart Square) is named in his honour.
-Writer Thomas Bernhard was raised in Salzburg and spent part of his life there.
-Herbert von Karajan was a notable musician and conductor. He was born in Salzburg and died in 1989 in neighbouring Anif.
-Anthropologist Udo Ludwig was born here.
-Roland Ratzenberger, Formula One driver, was born in Salzburg. He died in practice for the 1994 San Marino Grand Prix.
-Joseph Leutgeb, French horn virtuoso
-Klaus Ager, the distinguished contemporary composer and Mozarteum professor, was born in Salzburg on 10 May 1946.
-Alex Jesaulenko, Australian rules footballer and AFL Hall of Fame player with "Legend" status was born in Salzburg on 2 August 1945.
-Georg Trakl is one of the most important voices in German literature and he was also born in Salzburg.
-Theodor Herzl worked in the courts in Salzburg during the year after he earned his law degree in 1884.[6]
+        Mozart's birthplace at Getreidegasse 9
+        The composer Wolfgang Amadeus Mozart was born and raised in Salzburg and worked for the archbishops from 1769 to 1781. His house of birth and residence are tourist attractions. His family is buried in a small church graveyard in the old town, and there are many monuments to "Wolferl" in the city.
+        The composer Johann Michael Haydn, brother of the composer Joseph Haydn. His works were admired by Mozart and Schubert. He was also the teacher of Carl Maria von Weber and Anton Diabelli and is known for his sacred music.
+        Christian Doppler, an expert on acoustic theory, was born in Salzburg. He is most known for his discovery of the Doppler effect.
+        Josef Mohr was born in Salzburg. Together with Franz Gruber, he composed and wrote the text for "Silent Night". As a priest in neighbouring Oberndorf he performed the song for the first time in 1818.
+        King Otto of Greece was born Prince Otto Friedrich Ludwig of Bavaria at the Palace of Mirabell, a few days before the city reverted from Bavarian to Austrian rule.
+        Noted writer Stefan Zweig lived in Salzburg for about 15 years, until 1934.
+        Maria Von Trapp (later Maria Trapp) and her family lived in Salzburg until they fled to the United States following the Nazi takeover.
+        Salzburg is the birthplace of Hans Makart, a 19th-century Austrian painter-decorator and national celebrity. Makartplatz (Makart Square) is named in his honour.
+        Writer Thomas Bernhard was raised in Salzburg and spent part of his life there.
+        Herbert von Karajan was a notable musician and conductor. He was born in Salzburg and died in 1989 in neighbouring Anif.
+        Anthropologist Udo Ludwig was born here.
+        Roland Ratzenberger, Formula One driver, was born in Salzburg. He died in practice for the 1994 San Marino Grand Prix.
+        Joseph Leutgeb, French horn virtuoso
+        Klaus Ager, the distinguished contemporary composer and Mozarteum professor, was born in Salzburg on 10 May 1946.
+        Alex Jesaulenko, Australian rules footballer and AFL Hall of Fame player with "Legend" status was born in Salzburg on 2 August 1945.
+        Georg Trakl is one of the most important voices in German literature and he was also born in Salzburg.
+        Theodor Herzl worked in the courts in Salzburg during the year after he earned his law degree in 1884.[6]
     </div>
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/szabyg/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a>
+        get the source code on GitHub : <a href="http://github.com/szabyg/vie-annotation-bookmarklet">vie-annotation-bookmarklet</a>
     </div>
 
-  </div>
+</div>
 
-  
+
 </body>
 </html>
