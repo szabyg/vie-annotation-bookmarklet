@@ -15,7 +15,11 @@ jQuery(document).ready(function(){
 
     var z = window.myVie = new VIE();
     z.loadSchemaOrg();
-    z.use(new z.StanbolService({url : appConfig.stanbolUri, proxyDisabled: true}));
+    z.use(new z.StanbolService({
+        url : appConfig.stanbolUri,
+        proxyDisabled: true,
+        enhancer: {chain: appConfig.chain}
+    }));
 
     // make the content element editable
     jQuery(selector)

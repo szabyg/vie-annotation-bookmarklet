@@ -66,8 +66,8 @@
     ]);
     // Loading the scripts
     loadScripts([
-        appRoot + "annotate.js/lib/jquery/jquery-1.7.1.js",
-        appRoot + "annotate.js/lib/jquery-ui.1.9m5.js",
+        appRoot + "annotate.js/lib/jquery/jquery-1.8.2.js",
+        appRoot + "annotate.js/lib/jqueryui/jquery-ui.1.9.2.js",
         appRoot + "annotate.js/lib/underscore-min.js",
         appRoot + "annotate.js/lib/backbone-min.js",
 
@@ -78,7 +78,7 @@
         // appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
         appRoot + "jquery.rdfquery.debug.js?",
 
-        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?" + noCache(),
+        appRoot + "annotate.js/lib/vie/vie-2.1.0.debug.js?", // + noCache(),
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
@@ -91,8 +91,9 @@
         appRoot + "vie-widgets/jquery.fancybox/jquery.mousewheel-3.0.4.pack.js?",
         appRoot + "vie-widgets/jquery.fancybox/jquery.easing-1.3.pack.js?",
         appRoot + "activate.js?",
-        appRoot + "imagesearch.js?"
+        // appRoot + "imagesearch.js?"
     ]);
+    loadScripts(window.bookmarkletConfig.scriptsToLoad);
 
     // Show spinner
     var e = document.createElement("div");
