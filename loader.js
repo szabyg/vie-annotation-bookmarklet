@@ -78,7 +78,7 @@
         // appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
         appRoot + "jquery.rdfquery.debug.js?",
 
-        appRoot + "annotate.js/lib/vie/vie-2.1.0.debug.js?", // + noCache(),
+        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?", // + noCache(),
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
