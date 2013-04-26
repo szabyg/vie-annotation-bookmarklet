@@ -67,7 +67,7 @@
     // Loading the scripts
     loadScripts([
         appRoot + "annotate.js/lib/jquery/jquery-1.8.2.js",
-        appRoot + "annotate.js/lib/jqueryui/jquery-ui.1.9.2.js",
+        appRoot + "annotate.js/lib/jqueryui/jquery-ui.1.10.2.min.js",
         appRoot + "annotate.js/lib/underscore-min.js",
         appRoot + "annotate.js/lib/backbone-min.js",
 
@@ -81,6 +81,7 @@
         appRoot + "annotate.js/lib/vie/vie-latest.debug.js?", // + noCache(),
 
         appRoot + "annotate.js/lib/annotate.js?",
+        appRoot + "annotate.js/lib/vie.entitypreview.js?",
         appRoot + "vie-widgets/vie.widget.image_search.js?",
         appRoot + "vie-widgets/schemaOrg/schema.json?",
         appRoot + "vie-widgets/schemaOrg/wrapper.js?",
