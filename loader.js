@@ -69,7 +69,7 @@
         appRoot + "annotate.js/lib/jquery/jquery-1.8.2.js",
         appRoot + "annotate.js/lib/jqueryui/jquery-ui.1.10.2.min.js",
         appRoot + "annotate.js/lib/underscore-min.js",
-        appRoot + "annotate.js/lib/backbone-min.js",
+        appRoot + "annotate.js/lib/backboneJS/backbone.js",
 
         appRoot + "annotate.js/lib/hallo/hallo.js",
         appRoot + "annotate.js/lib/hallo/format.js",
@@ -78,7 +78,7 @@
         // appRoot + "annotate.js/lib/jquery.rdfquery.debug.js",
         appRoot + "jquery.rdfquery.debug.js?",
 
-        appRoot + "annotate.js/lib/vie/vie-latest.debug.js?", // + noCache(),
+        appRoot + "annotate.js/lib/vie/vie.js?", // + noCache(),
 
         appRoot + "annotate.js/lib/annotate.js?",
         appRoot + "annotate.js/lib/vie.entitypreview.js?",
